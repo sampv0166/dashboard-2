@@ -1,0 +1,35 @@
+.img {
+    width: 320px;
+    height: 180px;
+    object-fit: contain;
+    padding: 0.75rem;
+  }
+  
+  .result {
+    min-height: 100%;
+    max-height: auto;
+    width: auto;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+  }
+  
+  
+  #file[type='file'] {
+    display: none;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-top: 5px;
+    background-color: white;
+  }
