@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
 /// Scroll
-import PerfectScrollbar from "react-perfect-scrollbar";
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 /// Image
-import profile from "../../../images/profile/17.jpg";
-import avatar from "../../../images/avatar/1.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../actions/userActions";
-import { listProducts, searchProducts } from "../../../actions/productActions";
+import profile from '../../../images/profile/17.jpg';
+import avatar from '../../../images/avatar/1.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../actions/userActions';
+import { listProducts, searchProducts } from '../../../actions/productActions';
 
 const Header = ({ onNote, toggle, onProfile, onNotification, onBox }) => {
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
 
   const history = useHistory();
 
@@ -25,32 +25,32 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onBox }) => {
     dispatch(logout(dispatch, history));
   };
 
-  var path = window.location.pathname.split("/");
+  var path = window.location.pathname.split('/');
 
-  var name = path[path.length - 1].split("-");
+  var name = path[path.length - 1].split('-');
   var filterName = name.length >= 3 ? name.filter((n, i) => i > 0) : name;
-  var finalName = filterName.includes("app")
-    ? filterName.filter((f) => f !== "app")
-    : filterName.includes("ui")
-    ? filterName.filter((f) => f !== "ui")
-    : filterName.includes("uc")
-    ? filterName.filter((f) => f !== "uc")
-    : filterName.includes("basic")
-    ? filterName.filter((f) => f !== "basic")
-    : filterName.includes("form")
-    ? filterName.filter((f) => f !== "form")
-    : filterName.includes("table")
-    ? filterName.filter((f) => f !== "table")
-    : filterName.includes("page")
-    ? filterName.filter((f) => f !== "page")
-    : filterName.includes("email")
-    ? filterName.filter((f) => f !== "email")
-    : filterName.includes("ecom")
-    ? filterName.filter((f) => f !== "ecom")
-    : filterName.includes("chart")
-    ? filterName.filter((f) => f !== "chart")
-    : filterName.includes("editor")
-    ? filterName.filter((f) => f !== "editor")
+  var finalName = filterName.includes('app')
+    ? filterName.filter((f) => f !== 'app')
+    : filterName.includes('ui')
+    ? filterName.filter((f) => f !== 'ui')
+    : filterName.includes('uc')
+    ? filterName.filter((f) => f !== 'uc')
+    : filterName.includes('basic')
+    ? filterName.filter((f) => f !== 'basic')
+    : filterName.includes('form')
+    ? filterName.filter((f) => f !== 'form')
+    : filterName.includes('table')
+    ? filterName.filter((f) => f !== 'table')
+    : filterName.includes('page')
+    ? filterName.filter((f) => f !== 'page')
+    : filterName.includes('email')
+    ? filterName.filter((f) => f !== 'email')
+    : filterName.includes('ecom')
+    ? filterName.filter((f) => f !== 'ecom')
+    : filterName.includes('chart')
+    ? filterName.filter((f) => f !== 'chart')
+    : filterName.includes('editor')
+    ? filterName.filter((f) => f !== 'editor')
     : filterName;
   return (
     <div className="header">
@@ -60,7 +60,7 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onBox }) => {
             <div className="header-left">
               <div
                 className="dashboard_bar"
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: 'capitalize' }}
               >
                 {/*finalName.join(" ").length === 0
                   ? "Dashboard"
@@ -75,10 +75,9 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onBox }) => {
                     className="form-control"
                     placeholder="Search here"
                     onChange={(e) => {
-
                       setKeyword(e.target.value);
-                      
                     }}
+                    value={keyword}
                   />
                   <div className="input-group-append">
                     <span
@@ -86,6 +85,7 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onBox }) => {
                       onClick={() => {
                         console.log(keyword);
                         dispatch(listProducts(1, keyword));
+                        setKeyword('');
                       }}
                     >
                       <svg
@@ -359,7 +359,7 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onBox }) => {
                   role="button"
                   data-toggle="dropdown"
                   className={`nav-item dropdown header-profile ${
-                    toggle === "profile" ? "show" : ""
+                    toggle === 'profile' ? 'show' : ''
                   }`}
                   onClick={() => onProfile()}
                 >
@@ -367,7 +367,7 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onBox }) => {
                 </Link>
                 <div
                   className={`dropdown-menu dropdown-menu-right ${
-                    toggle === "profile" ? "show" : ""
+                    toggle === 'profile' ? 'show' : ''
                   }`}
                 >
                   {/*
@@ -412,7 +412,7 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onBox }) => {
                   <div
                     onClick={logoutHandler}
                     className="dropdown-item ai-icon"
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: 'pointer' }}
                   >
                     <svg
                       id="icon-logout"

@@ -1,5 +1,12 @@
-import React, { Fragment, useEffect } from 'react';
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import Products from './Products';
+import debounce from 'lodash.debounce';
 
 /// Data
 import productData from '../productData';
@@ -20,6 +27,11 @@ import { Formik } from 'formik';
 import { set } from 'date-fns';
 
 const ProductGrid = ({ match, history, hasVariant, setHasVariant }) => {
+  const [keyword, setKeyword] = useState('');
+  const [inputValue, setInputValue] = useState('');
+
+  const searchref = useRef();
+
   let pageNumber = match.params.pageNumber || 1;
 
   let items = [];
@@ -36,6 +48,17 @@ const ProductGrid = ({ match, history, hasVariant, setHasVariant }) => {
     pageNumber = number;
     dispatch(listProducts(pageNumber));
     history.push(`/ecom-product-grid/page/${number}`);
+  };
+
+  const debouncedSave = useCallback(
+    debounce((newValue) => dispatch(listProducts(1, newValue)), 1000),
+    []
+  );
+
+  const updateValue = (newValue) => {
+    setInputValue(newValue);
+    debouncedSave(newValue);
+  
   };
 
   useEffect(() => {
@@ -74,9 +97,19 @@ const ProductGrid = ({ match, history, hasVariant, setHasVariant }) => {
         <Message variant="danger">{error || errorProductLoading}</Message>
       ) : (
         <Fragment>
-          <div className="d-flex justify-content-end">
-            
-            <div className="basic-dropdown my-3">
+          <div className="d-flex justify-content-between my-4">
+            <div className="d-flex w-50">
+              <input
+                className="form-control shadow-none rounded mx-2"
+                placeholder="Search Products"
+                onChange={(input) => updateValue(input.target.value)}
+                value={inputValue}
+                ref={searchref}
+                autoFocus
+              />
+            </div>
+
+            <div className="basic-dropdown">
               <Dropdown>
                 <Dropdown.Toggle variant="secondary">
                   Add Product

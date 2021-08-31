@@ -114,8 +114,10 @@ const AddProductScreen = ({ history, match, hasVariant, setHasVariant }) => {
           formikFileArray.push(file);
         });
 
+        
         let formdata = new FormData();
         formdata.append("var_id", varId);
+
         formdata.append("images", formikFileArray);
 
         dispatch(insertSingleVariationImage(dispatch, formdata));
@@ -209,7 +211,7 @@ const AddProductScreen = ({ history, match, hasVariant, setHasVariant }) => {
     setSelectedFiles(source);
     const files = Array.from(formikFileArray).filter((file, i) => index !== i);
     formik.setFieldValue("images", files);
-    formik.setFieldValue("image", source);
+    formik.setFieldValue("image", files);
     setFormikFileArray(files);
   };
 
@@ -485,9 +487,8 @@ const AddProductScreen = ({ history, match, hasVariant, setHasVariant }) => {
   }, [dispatch, productId, product]);
 
   useLayoutEffect(() => {
-    if (product.length === 0) {
+    if (productId) {
       dispatch(listProductDetails(productId));
-      
     }
   }, [dispatch, productId]);
 
